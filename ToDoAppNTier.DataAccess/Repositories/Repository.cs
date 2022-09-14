@@ -35,7 +35,7 @@ namespace ToDoAppNTier.DataAccess.Repositories
             return asNoTracking ? await _todoContext.Set<T>().SingleOrDefaultAsync(filter) : await _todoContext.Set<T>().AsNoTracking().SingleOrDefaultAsync(filter);
         }
 
-        public async Task<T> GetById(object id)
+        public async Task<T> Find(object id)
         {
             return await _todoContext.Set<T>().FindAsync(id);
         }
@@ -45,16 +45,14 @@ namespace ToDoAppNTier.DataAccess.Repositories
             return _todoContext.Set<T>().AsQueryable();
         }
 
-        public void Remove(object id)
+        public void Remove(T entity)
         {
-            var deletedEntity = _todoContext.Set<T>().Find(id);
-            _todoContext.Set<T>().Remove(deletedEntity);
+            _todoContext.Set<T>().Remove(entity);
         }
 
-        public void Update(T entity)
+        public void Update(T entity, T unchanged)
         {
-            var updatedEntity = _todoContext.Set<T>().Find(entity.Id);
-            _todoContext.Entry(updatedEntity).CurrentValues.SetValues(entity);
+            _todoContext.Entry(unchanged).CurrentValues.SetValues(entity);
 
             //_todoContext.Set<T>().Update(entity);
         }

@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.2.2" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToDoAppNTier.Common\ToDoAppNTier.Common.csproj" />
     <ProjectReference Include="..\ToDoAppNTier.DataAccess\ToDoAppNTier.DataAccess.csproj" />
     <ProjectReference Include="..\ToDoAppNTier.Dtos\ToDoAppNTier.Dtos.csproj" />
   </ItemGroup>

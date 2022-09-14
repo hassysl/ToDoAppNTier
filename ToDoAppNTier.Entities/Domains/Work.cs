@@ -10,7 +10,7 @@ namespace ToDoAppNTier.Entities.Domains
     {
         public string Definition { get; set; }
         public bool IsCompleted { get; set; }
-        //jbjhgb
+
 
     }
 }
