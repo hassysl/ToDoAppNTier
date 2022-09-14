@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace ToDoAppNTier.Entities.Domains
 {
-    public class Work : BaseEntity
+    public class BaseEntity
     {
-        public string Definition { get; set; }
-        public bool IsCompleted { get; set; }
-        //jbjhgb
-
+        public int Id { get; set; }
     }
 }

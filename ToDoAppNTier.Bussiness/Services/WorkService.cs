@@ -49,9 +49,9 @@ namespace ToDoAppNTier.Bussiness.Services
             return workList;
         }
 
-        public async Task<WorkListDto> GetById(object id)
+        public async Task<WorkListDto> GetById(int id)
         {
-            var work = await _uow.GetRepository<Work>().GetById(id);
+            var work = await _uow.GetRepository<Work>().GetByFilter(x=> x.Id == id);
 
             return new()
             {
@@ -60,9 +60,9 @@ namespace ToDoAppNTier.Bussiness.Services
             };
         }
 
-        public async Task Remove(object id)
+        public async Task Remove(int id)
         {
-            var deletedWork = await _uow.GetRepository<Work>().GetById(id);
+            _uow.GetRepository<Work>().Remove(id);
             await _uow.SaveChanges();
         }
 

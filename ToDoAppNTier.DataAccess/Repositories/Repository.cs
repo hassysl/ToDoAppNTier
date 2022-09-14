@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ToDoAppNTier.DataAccess.Contexts;
 using ToDoAppNTier.DataAccess.Interfaces;
+using ToDoAppNTier.Entities.Domains;
 
 namespace ToDoAppNTier.DataAccess.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : class, new()
+    public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly ToDoContext _todoContext;
 
@@ -44,14 +45,18 @@ namespace ToDoAppNTier.DataAccess.Repositories
             return _todoContext.Set<T>().AsQueryable();
         }
 
-        public void Remove(T entity)
+        public void Remove(object id)
         {
-            _todoContext.Set<T>().Remove(entity);
+            var deletedEntity = _todoContext.Set<T>().Find(id);
+            _todoContext.Set<T>().Remove(deletedEntity);
         }
 
         public void Update(T entity)
         {
-            _todoContext.Set<T>().Update(entity);
+            var updatedEntity = _todoContext.Set<T>().Find(entity.Id);
+            _todoContext.Entry(updatedEntity).CurrentValues.SetValues(entity);
+
+            //_todoContext.Set<T>().Update(entity);
         }
     }
 }
